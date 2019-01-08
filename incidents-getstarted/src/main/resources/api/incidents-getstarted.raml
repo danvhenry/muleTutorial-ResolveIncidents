@@ -1,0 +1,53 @@
+#%RAML 1.0
+title: Incidents-GetStarted
+description: This API aggregates DevOps related incidents across multiple platforms & services into single HTTP calls.
+version: v1
+/resolve:
+  put:
+    responses:
+      '200':
+        description: Success
+        body:
+          application/json:
+            type: object
+            properties:
+              responses:
+                required: false
+                type: array
+                items:
+                  required: true
+                  example: '{"responses" : []}'
+                  type: string
+    body:
+      application/json:
+        description: Resolves an existing incident in both PagerDuty and StatusPage
+        example:
+          user:
+            status: resolved
+          pagerDuty:
+            incident_id: PUPSHS1
+          statusPage:
+            incident_name: bigServer
+        type: object
+        properties:
+          user:
+            required: true
+            type: object
+            properties:
+              status:
+                required: true
+                type: string
+          pagerDuty:
+            required: true
+            type: object
+            properties:
+              incident_id:
+                required: true
+                type: string
+          statusPage:
+            required: true
+            type: object
+            properties:
+              incident_name:
+                required: true
+                type: string

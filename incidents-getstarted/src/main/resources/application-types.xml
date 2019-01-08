@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="incidents" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: object
+properties:
+    incidents:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  example: PLWF33G
+                  type: string
+                type:
+                  example: incident
+                  type: string
+                status:
+                  example: resolved
+                  type: string]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#b06e4215-ac34-468e-ad87-43ab4f9328bf"/>
+  <types:enrichment select="#b9cb7fa4-7b42-4378-9323-86c2f1e40013">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="incidents"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
